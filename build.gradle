@@ -19,10 +19,16 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter:2.7.11'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.11'
+    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.1'
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.26'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.11'
+    testImplementation 'org.mockito:mockito-core:5.3.1'
+    testImplementation "com.github.tomakehurst:wiremock-jre8-standalone:2.35.0"
 }
 
 tasks.named('test') {
