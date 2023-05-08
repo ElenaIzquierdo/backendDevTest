@@ -1,13 +1,13 @@
-package com.example.backenddevtest;
+package com.example.similarproducts;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendDevTestApplication {
+public class SimilarProductsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BackendDevTestApplication.class, args);
+        SpringApplication.run(SimilarProductsApplication.class, args);
     }
 
 }
