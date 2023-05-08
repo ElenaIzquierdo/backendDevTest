@@ -31,7 +31,7 @@ class SimilarProductsControllerTest {
         Product someProduct = Product.builder()
                 .id("someId")
                 .name("someName")
-                .price(1L)
+                .price(1.0)
                 .isAvailable(true)
                 .build();
         when(useCase.execute("someProductId")).thenReturn(List.of(someProduct));
