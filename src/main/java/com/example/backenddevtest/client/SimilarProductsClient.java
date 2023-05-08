@@ -1,10 +1,7 @@
 package com.example.backenddevtest.client;
 
-import com.example.backenddevtest.dto.SimilarProductIdsDto;
 import com.example.backenddevtest.exceptions.ClientNullResponseException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;

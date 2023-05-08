@@ -13,7 +13,6 @@ import org.springframework.test.web.client.ExpectedCount;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.client.support.RestGatewaySupport;
 import wiremock.org.apache.commons.io.IOUtils;
 
 import java.io.FileInputStream;
