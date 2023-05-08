@@ -26,8 +26,7 @@ public class SimilarProductsUseCase {
         return similarProductIdsClient.getSimilarProductIds(productId)
                 .stream()
                 .map(productInformationClient::getProductInformation)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
+                .flatMap(Optional::stream)
                 .collect(Collectors.toList());
     }
 }
