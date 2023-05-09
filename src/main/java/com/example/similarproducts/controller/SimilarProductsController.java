@@ -17,7 +17,7 @@ public class SimilarProductsController {
     }
 
     @GetMapping("/product/{productId}/similar")
-    public List<Product> getEmployee(@PathVariable String productId) {
+    public List<Product> getSimilarProducts(@PathVariable String productId) {
         return useCase.execute(productId);
     }
 }

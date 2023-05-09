@@ -28,13 +28,10 @@ class SimilarProductsControllerTest {
 
     @Test
     void shouldReturn200AndReturnSimilarProductsWhenThereAreProductsReturnedByUseCase() throws Exception {
-        Product someProduct = Product.builder()
-                .id("someId")
-                .name("someName")
-                .price(1.0)
-                .isAvailable(true)
-                .build();
+        Product someProduct = new Product("someId", "someName", 1.0, true);
+
         when(useCase.execute("someProductId")).thenReturn(List.of(someProduct));
+
         mockMvc.perform(get("/product/someProductId/similar")).andExpect(status().isOk())
                 .andExpect(content().json("[{\"id\":\"someId\",\"name\":\"someName\",\"price\":1,\"available\":true}]"));
     }
@@ -42,6 +39,7 @@ class SimilarProductsControllerTest {
     @Test
     void shouldReturn200AndReturnEmptyListWhenNoProductsReturnedByUseCase() throws Exception {
         when(useCase.execute("someProductId")).thenReturn(List.of());
+
         mockMvc.perform(get("/product/someProductId/similar")).andExpect(status().isOk())
                 .andExpect(content().json("[]"));
     }

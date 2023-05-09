@@ -21,20 +21,10 @@ class SimilarProductsUseCaseTest {
 
     @Test
     void shouldReturnAListOfSimilarProductsByProductId() {
-        Product product1 = Product.builder()
-                .id("1")
-                .name("ball")
-                .price(10.0)
-                .isAvailable(true)
-                .build();
+        Product product1 = new Product("1", "ball", 10.0, true);
+        Product product2 = new Product("2", "sock", 15.0, true);
 
-        Product product2 = Product.builder()
-                .id("2")
-                .name("sock")
-                .price(15.0)
-                .isAvailable(true)
-                .build();
-        when(similarProductIdsClient.getSimilarProductIds("someProductId")).thenReturn(List.of("1", "2"));
+        when(similarProductIdsClient.getSimilarProductIds("someProductId")).thenReturn(List.of(1, 2));
         when(productInformationClient.getProductInformation("1")).thenReturn(Optional.of(product1));
         when(productInformationClient.getProductInformation("2")).thenReturn(Optional.of(product2));
 
@@ -55,14 +45,9 @@ class SimilarProductsUseCaseTest {
 
     @Test
     void shouldNotReturnProductsThatCouldNotGetProductDetails() {
-        Product product1 = Product.builder()
-                .id("1")
-                .name("ball")
-                .price(10.0)
-                .isAvailable(true)
-                .build();
+        Product product1 = new Product("1", "ball", 10.0, true);
 
-        when(similarProductIdsClient.getSimilarProductIds("someProductId")).thenReturn(List.of("1","2"));
+        when(similarProductIdsClient.getSimilarProductIds("someProductId")).thenReturn(List.of(1, 2));
         when(productInformationClient.getProductInformation("1")).thenReturn(Optional.of(product1));
         when(productInformationClient.getProductInformation("2")).thenReturn(Optional.empty());
 
