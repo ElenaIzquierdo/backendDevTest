@@ -33,3 +33,10 @@ services:
       - K6_OUT=influxdb=http://influxdb:8086/k6
     extra_hosts:
       - "host.docker.internal:host-gateway"
+  api:
+    container_name: api-similar-products
+    build:
+      dockerfile: Dockerfile
+    image: api-similar-products:latest
+    ports:
+      - "5005:5005"

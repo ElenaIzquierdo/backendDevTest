@@ -14,7 +14,7 @@ public class SimilarProductIdsClient {
 
     @Cacheable("similarProducts")
     public List<Integer> getSimilarProductIds(String productId) {
-        String url = "http://localhost:3001/product/" + productId + "/similarids";
+        String url = "http://host.docker.internal:3001/product/" + productId + "/similarids";
 
         HttpClient client = HttpClient.create()
                 .responseTimeout(Duration.ofSeconds(1));

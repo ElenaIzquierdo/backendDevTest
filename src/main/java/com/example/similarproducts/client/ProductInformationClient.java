@@ -16,7 +16,7 @@ public class ProductInformationClient {
 
     @Cacheable("productDetails")
     public Optional<Product> getProductInformation(String productId) {
-        String url = "http://localhost:3001/product/" + productId;
+        String url = "http://host.docker.internal:3001/product/" + productId;
 
         HttpClient client = HttpClient.create()
                 .responseTimeout(Duration.ofSeconds(1));
