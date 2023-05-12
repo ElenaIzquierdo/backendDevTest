@@ -17,7 +17,7 @@ public class SimilarProductIdsClient {
         String url = "http://host.docker.internal:3001/product/" + productId + "/similarids";
 
         HttpClient client = HttpClient.create()
-                .responseTimeout(Duration.ofSeconds(1));
+                .responseTimeout(Duration.ofMillis(500));
 
         WebClient.Builder builder = WebClient.builder()
                 .clientConnector(new ReactorClientHttpConnector(client));

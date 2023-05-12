@@ -19,7 +19,7 @@ public class ProductInformationClient {
         String url = "http://host.docker.internal:3001/product/" + productId;
 
         HttpClient client = HttpClient.create()
-                .responseTimeout(Duration.ofSeconds(1));
+                .responseTimeout(Duration.ofMillis(500));
 
         WebClient.Builder builder = WebClient.builder()
                 .clientConnector(new ReactorClientHttpConnector(client));
