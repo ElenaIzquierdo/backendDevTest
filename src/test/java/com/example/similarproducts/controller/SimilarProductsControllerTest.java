@@ -33,7 +33,7 @@ class SimilarProductsControllerTest {
         when(useCase.execute("someProductId")).thenReturn(List.of(someProduct));
 
         mockMvc.perform(get("/product/someProductId/similar")).andExpect(status().isOk())
-                .andExpect(content().json("[{\"id\":\"someId\",\"name\":\"someName\",\"price\":1,\"available\":true}]"));
+                .andExpect(content().json("[{\"id\":\"someId\",\"name\":\"someName\",\"price\":1,\"availability\":true}]"));
     }
 
     @Test

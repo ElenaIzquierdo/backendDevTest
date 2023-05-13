@@ -1,5 +1,6 @@
 package com.example.similarproducts.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ public class Product {
     String id;
     String name;
     Double price;
+    @JsonProperty("availability")
     boolean isAvailable;
 
     public Product(String id, String name, double price, boolean isAvailable) {
