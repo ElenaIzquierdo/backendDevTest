@@ -2,6 +2,7 @@ package com.example.similarproducts.client;
 
 import com.example.similarproducts.dto.Product;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,12 @@ import java.util.Optional;
 @Slf4j
 public class ProductInformationClient {
 
+    @Value("${external-api.baseUrl}")
+    private String externalApiBaseUrl;
+
     @Cacheable("productDetails")
     public Optional<Product> getProductInformation(String productId) {
-        String url = "http://host.docker.internal:3001/product/" + productId;
+        String url = externalApiBaseUrl + productId;
         try {
             log.info(String.format("Starting request to %s", url));
             HttpClient client = HttpClient.create()
