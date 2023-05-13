@@ -4,10 +4,13 @@ import com.example.similarproducts.dto.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.netty.http.client.HttpClient;
 
 import java.time.Duration;
@@ -44,10 +47,12 @@ public class ProductInformationClient {
             }
 
             return Optional.of(response);
+        } catch(WebClientResponseException.NotFound exception) {
+            log.error(String.format("Product with product id %s not found", productId));
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } catch(WebClientRequestException exception) {
-            String message = String.format("Call to %s failed due to time out", url);
-            log.error(message);
-            throw new RuntimeException(message);
+            log.error(String.format("Call to %s failed due to time out", url));
+            throw new RuntimeException();
         }
 
     }
