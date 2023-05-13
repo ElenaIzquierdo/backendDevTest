@@ -2,6 +2,7 @@ package com.example.similarproducts.controller;
 
 import com.example.similarproducts.dto.Product;
 import com.example.similarproducts.usecase.SimilarProductsUseCase;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ public class SimilarProductsController {
         this.useCase = useCase;
     }
 
-    @GetMapping("/product/{productId}/similar")
+    @GetMapping(path="/product/{productId}/similar", produces= MediaType.APPLICATION_JSON_VALUE)
     public List<Product> getSimilarProducts(@PathVariable String productId) {
         return useCase.execute(productId);
     }

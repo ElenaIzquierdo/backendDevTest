@@ -24,18 +24,23 @@ public class ProductInformationClient {
     @Value("${external-api.baseUrl}")
     private String externalApiBaseUrl;
 
+    private final WebClient webClient;
+
+    public ProductInformationClient() {
+        HttpClient client = HttpClient.create()
+                .responseTimeout(Duration.ofSeconds(1));
+
+        webClient = WebClient.builder()
+                .clientConnector(new ReactorClientHttpConnector(client)).build();
+
+    }
     @Cacheable("productDetails")
     public Optional<Product> getProductInformation(String productId) {
         String url = externalApiBaseUrl + productId;
         try {
             log.info(String.format("Starting request to %s", url));
-            HttpClient client = HttpClient.create()
-                    .responseTimeout(Duration.ofSeconds(1));
 
-            WebClient.Builder builder = WebClient.builder()
-                    .clientConnector(new ReactorClientHttpConnector(client));
-
-            Product response = builder.build()
+            Product response = webClient
                     .get()
                     .uri(url)
                     .retrieve()

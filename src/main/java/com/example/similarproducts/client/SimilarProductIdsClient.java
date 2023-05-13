@@ -1,5 +1,6 @@
 package com.example.similarproducts.client;
 
+import com.example.similarproducts.usecase.SimilarProductsUseCase;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -18,19 +19,23 @@ public class SimilarProductIdsClient {
 
     @Value("${external-api.baseUrl}")
     private String externalApiBaseUrl;
+    private final WebClient webClient;
+
+    public SimilarProductIdsClient() {
+        HttpClient client = HttpClient.create()
+                .responseTimeout(Duration.ofSeconds(1));
+
+        webClient = WebClient.builder()
+                .clientConnector(new ReactorClientHttpConnector(client)).build();
+    }
 
     @Cacheable("similarProducts")
     public List<Integer> getSimilarProductIds(String productId) {
         String url = externalApiBaseUrl + productId + "/similarids";
         try {
             log.info(String.format("Starting request to %s", url));
-            HttpClient client = HttpClient.create()
-                    .responseTimeout(Duration.ofSeconds(1));
 
-            WebClient.Builder builder = WebClient.builder()
-                    .clientConnector(new ReactorClientHttpConnector(client));
-
-            return builder.build()
+            return webClient
                     .get()
                     .uri(url)
                     .retrieve()
